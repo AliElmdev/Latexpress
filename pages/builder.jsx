@@ -52,33 +52,28 @@ export default function Builder() {
     setResumeData({ ...resumeData, [e.target.name]: e.target.value });
   };
 
-  // When a keyword is clicked, add it to the correct section based on its category.
   const handleKeywordClick = (keyword, category) => {
     setResumeData((prev) => {
-      if (category === "Technical Skills") {
-        // Assume technical skills are stored in the 'skills' array (as objects)
-        if (!prev.skills.some((skill) => skill.title === keyword)) {
-          return {
-            ...prev,
-            skills: [...prev.skills, { title: keyword, level: "Proficient" }],
+      // Create a copy of the skills array to modify
+      const updatedSkills = [...prev.skills];
+  
+      // Function to find the correct category index
+      const categoryIndex = updatedSkills.findIndex((item) => item.title === category);
+  
+      if (categoryIndex !== -1) {
+        // Check if the skill already exists
+        if (!updatedSkills[categoryIndex].skills.includes(keyword)) {
+          updatedSkills[categoryIndex] = {
+            ...updatedSkills[categoryIndex],
+            skills: [...updatedSkills[categoryIndex].skills, keyword],
           };
         }
-      } else if (category === "Relational Skills") {
-        // For relational skills, store as an array of strings (initialize if missing)
-        const existing = prev.relationalSkills || [];
-        if (!existing.includes(keyword)) {
-          return { ...prev, relationalSkills: [...existing, keyword] };
-        }
-      } else if (category === "Personal Strengths") {
-        // For personal strengths, store as an array of strings (initialize if missing)
-        const existing = prev.personalStrengths || [];
-        if (!existing.includes(keyword)) {
-          return { ...prev, personalStrengths: [...existing, keyword] };
-        }
       }
-      return prev;
+  
+      return { ...prev, skills: updatedSkills };
     });
   };
+  
 
   const fetchKpiScore = async () => {
     setIsFetchingKpi(true);
@@ -190,13 +185,15 @@ export default function Builder() {
     <ResumeContext.Provider
       value={{ resumeData, setResumeData, handleProfilePicture, handleChange }}
     >
+      {!window.matchMedia('print').matches && (
       <Meta
         title="ATSResume | Get hired with an ATS-optimized resume"
         description="ATSResume is a cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes."
         keywords="resume builder, ATS resume, job search, resume optimization"
       />
+    )}
 
-      <div className="left-0 w-full bg-white shadow-lg p-4 flex justify-between items-center mb-2">
+      <div className="left-0 w-full bg-white shadow-lg p-4 flex justify-between items-center mb-2 exclude-print">
         <img src="assets/CVLogo.png" alt="Logo" className="h-10 w-10" />
         <div className="flex space-x-4">
           <button

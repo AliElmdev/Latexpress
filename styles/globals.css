@@ -118,12 +118,17 @@
     @page {
         size: A4;
         margin: 10mm;
+        margin-top: 0;
+        margin-bottom: 0;
     }
     .preview {
         overflow-y: visible !important;
     }
-    .preview::after {
-        content: "Created using https://atsresume.vercel.app/";
+    .header {
+        display: none !important;
+    }
+    /* .preview::after {
+        content: "Created using https://latexpress.app/";
         position: fixed;
         bottom: 0;
         right: 0;
@@ -131,5 +136,5 @@
         font-size: small;
         text-align: center;
         z-index: -1;
-    }
+    } */
 }

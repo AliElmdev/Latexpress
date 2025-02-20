@@ -11,17 +11,24 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Missing annonce or competences in request body" });
     }
 
+    // Updated prompt with professional scoring methodology instructions.
     const prompt = `
-    Analyze this job announcement and resume competencies to give a score from 0 to 100 based on how well the resume fits the job.
+    Analyze this job announcement and resume competencies using the following structured, professional methodology and return only a single numeric score between 0 and 100 with no additional text:
+
+    1. Keyword Matching (50%): Evaluate how well the resume matches key technical and soft skills mentioned in the job announcement.
+    2. Experience Relevance (20%): Assess if the candidate’s experience aligns with the job requirements.
+    3. Education & Certifications (10%): Consider whether the candidate holds the required degree and certifications.
+    4. Soft Skills & Additional Criteria (10%): Evaluate other relevant soft skills and attributes.
+    5. Industry & Domain Fit (10%): Determine if the candidate has domain-specific experience relevant to the job.
+
+    Compute the final score using the weights above, where 100 indicates a perfect match and 0 indicates no match.
 
     Job Announcement:
     ${annonce}
 
     Resume Competencies:
     ${competences}
-
-    Evaluate the resume and provide a score between 0 and 100, where 100 indicates a perfect match and 0 indicates no match. Return just the final score between 0 and 100 no additional text.
-  `;
+    `;
 
     // Environment variables
     const apiKey = process.env.OPENROUTER_API_KEY;
@@ -70,8 +77,11 @@ export default async function handler(req, res) {
                 continue;
             }
 
-            const messageContent = data.choices[0].message.content.trim();
+            let messageContent = data.choices[0].message.content.trim();
             console.log('API Response:', messageContent);
+
+            // Remove markdown code block markers if present
+            messageContent = messageContent.replace(/```json/g, '').replace(/```/g, '').trim();
 
             // Parse the score from the message content
             score = parseInt(messageContent, 10);
@@ -96,6 +106,6 @@ export default async function handler(req, res) {
         return res.status(200).json({ score: 0 });
     }
 
-    // Return the valid score
+    // Return only the final score as a number
     res.status(200).json({ score });
 }

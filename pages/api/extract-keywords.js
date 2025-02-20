@@ -16,15 +16,15 @@ export default async function handler(req, res) {
     // Improved prompt to categorize the keywords
     const prompt = `Given the following job description and resume, identify the key skills and competencies that are mentioned in the job description but missing from the resume. 
 Categorize the skills into three sections:
-1. "Technical Skills": Hard skills like programming languages, software, or technical abilities.
-2. "Relational Skills": Soft skills like teamwork, communication, or leadership.
-3. "Personal Strengths": Attributes like adaptability, resilience, or problem-solving.
+1. "Techniques": Hard skills like programming languages, software, or technical abilities.
+2. "Relationnel": Soft skills like teamwork, communication, or leadership.
+3. "Atouts": Attributes like adaptability, resilience, or problem-solving.
 
 Return the result in a JSON format like this:
 {
-  "Technical Skills": ["skill1", "skill2"],
-  "Relational Skills": ["skill3", "skill4"],
-  "Personal Strengths": ["skill5", "skill6"]
+  "Techniques": ["skill1", "skill2"],
+  "Relationnel": ["skill3", "skill4"],
+  "Atouts": ["skill5", "skill6"]
 }
 
 Job Description:
@@ -101,7 +101,7 @@ Return only the first 10 keywords distributed among the three categories.`;
 
     if (Object.keys(categorizedKeywords).length === 0) {
         console.error("Failed to get valid categorized keywords after 3 attempts:", lastError);
-        return res.status(200).json({ keywords: { "Technical Skills": [], "Relational Skills": [], "Personal Strengths": [] } });
+        return res.status(200).json({ keywords: { "Techniques": [], "Relationnel": [], "Atouts": [] } });
     }
 
     res.status(200).json({ keywords: categorizedKeywords });
