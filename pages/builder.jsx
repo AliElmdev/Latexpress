@@ -185,13 +185,11 @@ export default function Builder() {
     <ResumeContext.Provider
       value={{ resumeData, setResumeData, handleProfilePicture, handleChange }}
     >
-      {!window.matchMedia('print').matches && (
       <Meta
         title="ATSResume | Get hired with an ATS-optimized resume"
         description="ATSResume is a cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes."
         keywords="resume builder, ATS resume, job search, resume optimization"
       />
-    )}
 
       <div className="left-0 w-full bg-white shadow-lg p-4 flex justify-between items-center mb-2 exclude-print">
         <img src="assets/CVLogo.png" alt="Logo" className="h-10 w-10" />
@@ -256,9 +254,9 @@ export default function Builder() {
 
       <div className="f-col gap-4 md:flex-row justify-evenly max-w-7xl md:mx-auto md:h-screen md:overflow-y-auto">
         {viewMode === "builder" ? (
-          <div>
+          <div className="exclude-print">
             {!formClose && (
-              <form className="p-4 bg-blue-400 exclude-print md:max-w-[100%] md:h-screen md:overflow-y-scroll">
+              <form className="p-4 bg-blue-400 md:max-w-[100%] md:h-screen md:overflow-y-scroll">
                 <LoadUnload />
                 <PersonalInformation />
                 <SocialMedia />
@@ -275,7 +273,7 @@ export default function Builder() {
             )}
           </div>
         ) : viewMode === "smart" ? (
-          <div className="p-4 bg-white min-h-screen">
+          <div className="p-4 bg-white min-h-screen exclude-print">
             <h2 className="text-2xl font-bold mb-4">Smart Analysis</h2>
             <div className="max-w-2xl mx-auto">
               <textarea
@@ -359,7 +357,7 @@ export default function Builder() {
             </div>
           </div>
         ) : (
-          <div className="p-4 bg-blue-400 exclude-print md:max-w-[100%] md:h-screen md:overflow-y-scroll">
+          <div className="p-4 bg-blue-400 md:max-w-[100%] md:h-screen md:overflow-y-scroll exclude-print">
             <div className="bg-white p-4 rounded shadow-md">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="text-gray-600 font-semibold">LaTeX Code</h3>
