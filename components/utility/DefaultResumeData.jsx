@@ -1,8 +1,8 @@
 const DefaultResumeData = {
-  name: "Ali EL MAKHROUBI",
+  name: "Full Name",
   position: "Developer",
-  contactInformation: "+212 605296470",
-  email: "alielmakhroubi00@gmail.com",
+  contactInformation: "+33 600000000",
+  email: "mailadress@gmail.com",
   address: "Brest, FA",
   profilePicture: "",
   socialMedia: [
