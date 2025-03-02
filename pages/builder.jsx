@@ -16,6 +16,7 @@ import Education from "../components/form/Education";
 import Certification from "../components/form/certification";
 import { generateLaTeX } from "../components/utility/latexGenerator"; // Verify correct path
 import { FaUserCircle } from "react-icons/fa";
+import Navbar from "../components/hero/Navbar";
 
 const getSavedResumeData = () => {
   if (typeof window !== "undefined") {
@@ -202,8 +203,9 @@ export default function Builder() {
         description="ATSResume is a cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes."
         keywords="resume builder, ATS resume, job search, resume optimization"
       />
+      <Navbar viewMode={viewMode} setViewMode={setViewMode} />
 
-      <div className="left-0 w-full bg-white shadow-lg p-4 flex justify-between items-center mb-2 exclude-print">
+      {/* <div className="left-0 w-full bg-white shadow-lg p-4 flex justify-between items-center mb-2 exclude-print">
         <img src="assets/CVLogo.png" alt="Logo" className="h-10 w-10" />
         <div className="flex space-x-4">
           <button
@@ -262,7 +264,7 @@ export default function Builder() {
             </div>
           )}
         </div>
-      </div>
+      </div> */}
 
       <div className="f-col gap-4 md:flex-row justify-evenly max-w-7xl md:mx-auto md:h-screen md:overflow-y-auto">
         {viewMode === "builder" ? (
