@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Language from "../components/form/Language";
 import Meta from "../components/meta/Meta";
@@ -17,18 +17,30 @@ import Certification from "../components/form/certification";
 import { generateLaTeX } from "../components/utility/latexGenerator"; // Verify correct path
 import { FaUserCircle } from "react-icons/fa";
 
-const ResumeContext = createContext(DefaultResumeData);
+const getSavedResumeData = () => {
+  if (typeof window !== "undefined") {
+    const storedData = localStorage.getItem("resumeData");
+    return storedData ? JSON.parse(storedData) : DefaultResumeData;
+  }
+  return DefaultResumeData;
+};
+
+const ResumeContext = createContext(getSavedResumeData());
+// const ResumeContext = createContext(DefaultResumeData);
 const Print = dynamic(() => import("../components/utility/WinPrint"), {
   ssr: false,
 });
 
 export default function Builder() {
-  const [resumeData, setResumeData] = useState(DefaultResumeData);
+  const [resumeData, setResumeData] = useState(getSavedResumeData());
   const [formClose, setFormClose] = useState(false);
   const [viewMode, setViewMode] = useState("builder");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [kpiScore, setKpiScore] = useState(null);
   const [isFetchingKpi, setIsFetchingKpi] = useState(false);
+  useEffect(() => {
+    localStorage.setItem("resumeData", JSON.stringify(resumeData));
+  }, [resumeData]);
 
   // State for Smart Analysis
   // Now generatedKeywords is a JSON object with keys for each category.
