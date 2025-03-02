@@ -134,16 +134,17 @@ export const generateLaTeX = (resumeData) => {
   \\setlength{\\LTpost}{0pt}
   \\setlength{\\tabcolsep}{0pt}
   
-  \newenvironment{entrylist}{
-    \begin{longtable}{@{}p{0.15\textwidth} p{0.85\textwidth}@{}}
+  \\newenvironment{entrylist}{
+    \\setlength{\\LTleft}{15}
+    \\begin{longtable}{@{}p{0.15\\textwidth} p{0.85\\textwidth}@{}}
     }{
-        \end{longtable}
+        \\end{longtable}
     }
 
   
   \\newcommand{\\entry}[4]{%
       \\parbox[t]{0.15\\textwidth}{\\small #1}%
-      &\\parbox[t]{0.85\\textwidth}{\\textbf{#2}\\hfill{\\footnotesize \\textbf{\\textcolor{black}{#3}}}\\\\ #4}\\\\%
+      &\\parbox[t]{0.82\\textwidth}{\\textbf{#2}\\hfill{\\footnotesize \\textbf{\\textcolor{black}{#3}}}\\\\ #4}\\\\%
   }
   
   \\newcommand{\\slashsep}{\\hspace{3mm}/\\hspace{3mm}}
@@ -303,7 +304,7 @@ export const generateLaTeX = (resumeData) => {
   \\vspace{-10pt}
   \\cvsect{Langues}
   \\vspace{-0pt}
-  \\hspace{26mm} \\textbf{${languages.map(lang => escapeLaTeX(lang.language)).join(', ')}} 
+  \\hspace{31mm} \\textbf{${languages.map(lang => escapeLaTeX(lang.language)).join(', ')}} 
   
   \\end{document}
   `;
