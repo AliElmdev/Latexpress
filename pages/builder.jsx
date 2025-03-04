@@ -203,6 +203,7 @@ export default function Builder() {
         description="ATSResume is a cutting-edge resume builder that helps job seekers create a professional, ATS-friendly resume in minutes."
         keywords="resume builder, ATS resume, job search, resume optimization"
       />
+      <meta name="google-site-verification" content="vjtaI92AZBt2HzI1L4Qe_8xLlcneihKa0YyPGQUfEik" />
       <Navbar viewMode={viewMode} setViewMode={setViewMode} />
 
       {/* <div className="left-0 w-full bg-white shadow-lg p-4 flex justify-between items-center mb-2 exclude-print">
@@ -384,7 +385,7 @@ export default function Builder() {
                   Copy
                 </button>
               </div>
-              <div className="relative">
+              <div className="static">
                 <pre className="text-sm font-mono overflow-auto max-h-96 bg-gray-50 p-4 rounded">
                   <code>
                     {generateLaTeX(resumeData)
