@@ -8,15 +8,15 @@ const DefaultResumeData = {
   socialMedia: [
     {
       socialMedia: "Github",
-      link: "github.com//bedivere-lea",
+      link: "github.com//AliElmdev",
     },
     {
       socialMedia: "LinkedIn",
-      link: "linkedin.com/in/bedivere-lea",
+      link: "linkedin.com//in//ali-elmakhroubi-9113441a4",
     },
     {
       socialMedia: "Website",
-      link: "bedivere-lea.github.io",
+      link: "alielmakhroubi.netlify.app",
     },
   ],
   summary: "Resourceful Developer with 11 years of experience in designing and developing user interfaces, testing and training employees. Skilled at utilizing a wide variety of tools and programs to provide effective applications.",
@@ -59,13 +59,13 @@ const DefaultResumeData = {
     {
       title: "Techniques",
       skills: [
-        "JavaScript", "Python", "Web Services", "C++", "HTML5", "CSS", "SQL", "User Interface", "Creativity"
+        "JavaScript", "Python", "Web Services", "C++", "HTML5"
       ]
     },
     {
       title: "Relationnel",
       skills: [
-        "Collaboration", "Problem-solving", "Communication", "Time management", "Result-oriented"
+        "Collaboration", "Problem-solving"
       ]
     },
     {
